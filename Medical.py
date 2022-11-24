@@ -37,9 +37,9 @@ def state_data():
     Price = ['Rs.120000','Rs.300000','Rs.70000','Rs.120000']
     
     if(treatment_selected=='Heart Surgery'):
-        lst = [['Ganga Ram Hospital', 'Rs.120000'], ['LIBS', 'Rs.300000'],
-       ['MAX Hospital', 'Rs.70000'], ['Medanta Hospital', 'Rs.100000']]
-        df_heart = pd.DataFrame(lst, columns =['Hospital Name', 'Cost'])
+        lst = [['Ganga Ram Hospital', 'Rs.120000','Dr. John'], ['LIBS', 'Rs.300000','Dr. AS'],
+       ['MAX Hospital', 'Rs.70000', 'Dr. FK'], ['Medanta Hospital', 'Rs.100000','Dr. Raun']]
+        df_heart = pd.DataFrame(lst, columns =['Hospital Name', 'Cost', 'Doctor Name'])
                
         st.dataframe(df_heart)
     else:

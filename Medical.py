@@ -73,7 +73,7 @@ def countryData():
 # App starts here
 ############################
 st.header("Team Bremner")
-st.header("Estimate your Medical Bill and Choose as per your Budget")
+st.subheader("Estimate your Medical Bill and Choose as per your Budget")
 #countryData()
 state_data()
 # page = st.sidebar.selectbox('Select page',['Country data','Continent data']) 

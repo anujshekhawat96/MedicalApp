@@ -10,7 +10,7 @@ import pandas_datareader as data
 
 import streamlit as st
 
-
+from st_aggrid import GridOptionsBuilder, AgGrid, GridUpdateMode, DataReturnMode
 
 import streamlit as st
 import pandas as pd
@@ -44,7 +44,8 @@ def state_data():
        ['MAX Hospital', 'Rs.70000', 'Dr. FK','200','190','10'], ['Medanta Hospital', 'Rs.100000','Dr. Raun','500','250','250']]
         df_heart = pd.DataFrame(lst, columns =['Hospital Name', 'Cost', 'Doctor Name','Total Number of Beds','Occupied','Vacant'])
                
-        st.dataframe(df_heart)
+        
+        AgGrid(df_heart)
     else:
         lst = [['Ortho', 'Rs.75000'], ['Dr Ortho', 'Rs.85000'],
             ['MAX Hospital', 'Rs.35000'], ['ABC Hospital', 'Rs.55000']]

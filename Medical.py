@@ -6,13 +6,11 @@ from numpy import array
 from sklearn.preprocessing import StandardScaler
 import pandas_datareader as data 
 
-
-pip install streamlit-aggrid
 import streamlit as st
 from st_aggrid import AgGrid
 
 
-import streamlit as st
+
 import pandas as pd
 import plotly.express as px
 

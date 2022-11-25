@@ -7,7 +7,7 @@ from sklearn.preprocessing import StandardScaler
 import pandas_datareader as data 
 
 
-
+pip install streamlit-aggrid
 import streamlit as st
 from st_aggrid import AgGrid
 

@@ -30,7 +30,10 @@ from PIL import Image
 
 def state_data():
     city_list = ['Delhi', 'Mumbai', 'Kolkata', 'Chennai']
+    country_list=['India','Bangladesh','Pakistan','Nepal','Srilanka']
+    country_selected = st.selectbox("Select a Country",country_list)
     state_selected = st.selectbox("Select a State:", city_list)
+    
     treatment = ['Heart Surgery','Knee Surgery','Liver Transplant','Kidney Transplant','Other Surgeries']
     treatment_selected = st.selectbox("Select a Treatment Looking for:", treatment)
     List_hospital = ['Ganga Ram Hospital', 'LIBS', 'MAX Hospital','Medanta Hospital']

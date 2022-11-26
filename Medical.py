@@ -60,8 +60,11 @@ def state_data():
 ############################
 # App starts here
 ############################
+from PIL import Image
+image = Image.open('medicalimage.jpg')
 
-st.header("MedTrust")
+st.image(image, caption='Pay Right')
+st.header("Team Bremner")
 st.subheader("Check Price for Treatment")
 
 #state_data()

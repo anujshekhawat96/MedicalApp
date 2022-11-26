@@ -39,8 +39,8 @@ def state_data():
     Price = ['Rs.120000','Rs.300000','Rs.70000','Rs.120000']
     
     if(treatment_selected=='Heart Surgery'):
-        lst = [['Ganga Ram Hospital', 'Rs.120000','Dr. John','100','45','55'], ['LIBS', 'Rs.300000','Dr. AS','150','100','50'],
-       ['MAX Hospital', 'Rs.70000', 'Dr. FK','200','190','10'], ['Medanta Hospital', 'Rs.100000','Dr. Raun','500','250','250']]
+        lst = [['Ganga Ram Hospital', 'Rs.120,000','Dr. John','100','45','55'], ['LIBS', 'Rs.300,000','Dr. AS','150','100','50'],
+       ['MAX Hospital', 'Rs.70,000', 'Dr. FK','200','190','10'], ['Medanta Hospital', 'Rs.100,000','Dr. Raun','500','250','250'],['Yashoda Hospital', 'Rs.100,000','Dr. Raun','500','250','250']]
         df_heart = pd.DataFrame(lst, columns =['Hospital Name', 'Cost', 'Doctor Name','Total Number of Beds','Occupied','Vacant'])
                
         
@@ -77,8 +77,8 @@ state_selected = st.selectbox("Select a State:", city_list)
 treatment = ['Heart Surgery','Knee Surgery','Liver Transplant','Kidney Transplant','Other Surgeries']
 treatment_selected = st.selectbox("Select a Treatment Looking for:", treatment)
 
-lst = [['Ganga Ram Hospital', '340 Vasant Kunj','Rs.120000','Dr. John','100','45','55'], ['LIBS', '244 Karol Bagh','Rs.300000','Dr. AS','150','100','50'],
-       ['MAX Hospital', '33 South Ext','Rs.70000', 'Dr. FK','200','190','10'], ['Medanta Hospital', '44 Gurgaon Road','Rs.100000','Dr. Raun','500','250','250']]
+lst = [['Ganga Ram Hospital', '340 Vasant Kunj','Rs.120,000','Dr. John','100','45','55'], ['LIBS', '244 Karol Bagh','Rs.300,000','Dr. AS','150','100','50'],
+       ['MAX Hospital', '33 South Ext','Rs.70,000', 'Dr. FK','200','190','10'], ['Medanta Hospital', '44 Gurgaon Road','Rs.100,000','Dr. Raun','500','250','250'],['Yashoda Hospital', '12 Kaushambi','Rs.140,000','Dr. Kim','600','350','250']]
 df_heart = pd.DataFrame(lst, columns =['Hospital Name', 'Address','Cost', 'Doctor Name','Total Number of Beds','Occupied','Vacant'])
 
 if(treatment_selected=='Heart Surgery'):
@@ -97,7 +97,7 @@ if(treatment_selected=='Heart Surgery'):
     fit_columns_on_grid_load=False,
     theme = 'streamlit', #Add theme color to the table
     enable_enterprise_modules=True,
-    height=300, 
+    height=250, 
     width='100%',
     reload_data=True
                  )
@@ -105,7 +105,7 @@ if(treatment_selected=='Heart Surgery'):
 else:
    
     lst2 = [['George Hospital', '44 Vasant Kunj','Rs.150,000','Dr KP','1000','770','230'], ['Transplant Hospital', '33 Rk Puram','Rs.185,000','Dr SP','600','480','120'],
-            ['Healthline Hospital', '552 Karolbagh','Rs.235000','Dr Thomas','500','200','300'], ['ABC Hospital', '340 Dwarka','Rs.155000','Dr XY','400','300','100']]
+            ['Healthline Hospital', '552 Karolbagh','Rs.235,000','Dr Thomas','500','200','300'], ['ABC Hospital', '340 Dwarka','Rs.155,000','Dr XY','400','300','100'],['Medanta Hospital', '44 Gurgaon Road','Rs.100,000','Dr. Yon','500','250','250']]
    
     df_else = pd.DataFrame(lst2, columns =['Hospital Name', 'Address','Cost', 'Doctor Name','Total Number of Beds','Occupied','Vacant'])  
         
@@ -124,14 +124,19 @@ else:
     fit_columns_on_grid_load=False,
     theme = 'streamlit', #Add theme color to the table
     enable_enterprise_modules=True,
-    height=300, 
+    height=250, 
     width='100%',
     reload_data=True
                  )
 
 
 
-
+st.subheader("Fill Patient Details")
+Name = st.text_input('Full Name of Patient')
+Address = st.text_input('Address of Patient')
+ContactNumber = st.text_input('Contact Number')
+healthlist =['Yes','No']
+healthinsurance = st.selectbox("Health Insurance ", healthlist)
 
 if st.button('Submit Request'):
     st.write('Thank you for Submitting your Request!!')

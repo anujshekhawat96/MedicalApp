@@ -9,7 +9,7 @@ import pandas_datareader as data
 import streamlit as st
 
 from st_aggrid import AgGrid
-
+from st_aggrid import GridOptionsBuilder, AgGrid, GridUpdateMode, DataReturnMode
 
 
 import pandas as pd
@@ -51,21 +51,6 @@ def state_data():
         df_else = pd.DataFrame(lst, columns =['Hospital Name', 'Cost'])   
         st.dataframe(df_else)  
 
-def countryData():
-    # Countries
-	clist = df['country'].unique()
-
-	country = st.selectbox("Select a country:", clist)
-
-	col1, col2 = st.columns(2)
-
-	fig = px.line(df[df['country'] == country],
-		x="year", y="gdpPercap", title="GDP per Capita")
-	col1.plotly_chart(fig, use_container_width=True)
-
-	fig = px.line(df[df['country'] == country],
-		x="year", y="pop", title="Population Growth")
-	col2.plotly_chart(fig, use_container_width=True)
 
 
 
@@ -75,13 +60,77 @@ def countryData():
 ############################
 # App starts here
 ############################
-st.header("Team Bremner")
-st.subheader("Estimate your Medical Bill and Choose as per your Budget")
-#countryData()
-state_data()
-# page = st.sidebar.selectbox('Select page',['Country data','Continent data']) 
-# if(page=='Country data'):
-# 	countryData()
-# else:
-# 	continentData()
 
+st.header("MedTrust")
+st.subheader("Check Price for Treatment")
+
+#state_data()
+
+##Beautification of APP
+city_list = ['Delhi', 'Mumbai', 'Kolkata', 'Chennai']
+country_list=['India','Bangladesh','Pakistan','Nepal','Srilanka']
+country_selected = st.selectbox("Select a Country",country_list)
+state_selected = st.selectbox("Select a State:", city_list)
+treatment = ['Heart Surgery','Knee Surgery','Liver Transplant','Kidney Transplant','Other Surgeries']
+treatment_selected = st.selectbox("Select a Treatment Looking for:", treatment)
+
+lst = [['Ganga Ram Hospital', 'Rs.120000','Dr. John','100','45','55'], ['LIBS', 'Rs.300000','Dr. AS','150','100','50'],
+       ['MAX Hospital', 'Rs.70000', 'Dr. FK','200','190','10'], ['Medanta Hospital', 'Rs.100000','Dr. Raun','500','250','250']]
+df_heart = pd.DataFrame(lst, columns =['Hospital Name', 'Cost', 'Doctor Name','Total Number of Beds','Occupied','Vacant'])
+
+if(treatment_selected=='Heart Surgery'):
+
+    gb = GridOptionsBuilder.from_dataframe(df_heart)
+    gb.configure_pagination(paginationAutoPageSize=True) #Add pagination
+    gb.configure_side_bar() #Add a sidebar
+    gb.configure_selection('multiple', use_checkbox=True, groupSelectsChildren="Group checkbox select children") #Enable multi-row selection
+    gridOptions = gb.build()
+
+    grid_response = AgGrid(
+    df_heart,
+    gridOptions=gridOptions,
+    data_return_mode='AS_INPUT', 
+    update_mode='MODEL_CHANGED', 
+    fit_columns_on_grid_load=False,
+    theme = 'streamlit', #Add theme color to the table
+    enable_enterprise_modules=True,
+    height=250, 
+    width='100%',
+    reload_data=True
+                 )
+   
+else:
+   
+    lst2 = [['George Hospital', 'Rs.150,000','Dr KP','1000','770','230'], ['Transplant Hospital', 'Rs.185,000','Dr SP','600','480','120'],
+            ['Healthline Hospital', 'Rs.235000','Dr Thomas','500','200','300'], ['ABC Hospital', 'Rs.155000','Dr XY','400','300','100']]
+   
+    df_else = pd.DataFrame(lst2, columns =['Hospital Name', 'Cost', 'Doctor Name','Total Number of Beds','Occupied','Vacant'])  
+        
+    gb1 = GridOptionsBuilder.from_dataframe(df_else)
+    
+    gb1.configure_pagination(paginationAutoPageSize=True) #Add pagination
+    gb1.configure_side_bar() #Add a sidebar
+    gb1.configure_selection('multiple', use_checkbox=True, groupSelectsChildren="Group checkbox select children") #Enable multi-row selection
+    gridOptions = gb1.build()
+
+    grid_response = AgGrid(
+    df_else,
+    gridOptions=gridOptions,
+    data_return_mode='AS_INPUT', 
+    update_mode='MODEL_CHANGED', 
+    fit_columns_on_grid_load=False,
+    theme = 'streamlit', #Add theme color to the table
+    enable_enterprise_modules=True,
+    height=250, 
+    width='100%',
+    reload_data=True
+                 )
+
+
+
+
+
+if st.button('Submit Request'):
+    st.write('Thank you for Submitting your Request!!')
+else:
+    st.write('')
